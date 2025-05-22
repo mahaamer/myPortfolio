@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --font-sans: 'Poppins', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
