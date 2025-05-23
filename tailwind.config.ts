@@ -11,10 +11,10 @@ const config: Config = {
 	theme: {
 		extend: {
 			colors: {
-				background: "#0F172A", // Dark Slate Blue
+				background: "#0F172A",
 				accent: {
-					pink: "#EC4899", // Floral Pink
-					violet: "#9333EA", // Violet
+					pink: "#EC4899",
+					violet: "#9333EA",
 				},
 				neutral: {
 					white: "#F9FAFB",

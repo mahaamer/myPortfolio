@@ -1,3 +1,5 @@
+import Navbar from "@/components/sections/Navbar"
+import ContactBloom from "@/components/ui/ContactBloom"
 import { Open_Sans, Poppins } from "next/font/google"
 import type { ReactNode } from "react"
 import "./globals.css"
@@ -27,7 +29,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" className={`${poppins.variable} ${openSans.variable}`}>
 			<body className="font-sans bg-background text-neutral-white">
+				<Navbar />
 				{children}
+				<ContactBloom />
 			</body>
 		</html>
 	)
