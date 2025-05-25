@@ -4,9 +4,11 @@
   /* Brand Colors */
   --color-background: #0F172A;
   --color-accent-pink: #EC4899;
+  --color-accent-pink-10: rgba(236, 72, 153, 0.1);
   --color-accent-pink-40: rgba(236, 72, 153, 0.4);
   /* ⬅️ 40% transparency */
   --color-accent-violet: #9333EA;
+  --color-accent-violet-10: rgba(147, 51, 234, 0.1);
   --color-accent-violet-40: rgba(147, 51, 234, 0.4);
   /* ⬅️ 40% transparency */
   --color-neutral-white: #F9FAFB;
@@ -23,12 +25,20 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-neutral-white);
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
+}
+
+.bg-background80 {
+  background-color: #0f172a77
 }
 
 .text-accent-violet {
@@ -49,6 +59,14 @@ body {
 
 .bg-accent-violet {
   background-color: var(--color-accent-violet);
+}
+
+.bg-accent-pink10 {
+  background-color: var(--color-accent-pink-10);
+}
+
+.bg-accent-violet10 {
+  background-color: var(--color-accent-violet-10);
 }
 
 .bg-accent-pink40 {
