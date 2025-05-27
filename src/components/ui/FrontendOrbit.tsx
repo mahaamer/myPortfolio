@@ -1,34 +1,55 @@
 "use client"
 
-import { useState } from "react"
+import { CSSProperties, ReactNode, useEffect, useState } from "react"
 import {
+	SiBootstrap,
 	SiCreatereactapp,
 	SiCss3,
 	SiHtml5,
 	SiJavascript,
+	SiJest,
+	SiJquery,
 	SiReact,
 	SiRedux,
 	SiTailwindcss,
+	SiTypescript,
 } from "react-icons/si"
+type SkillCardProps = {
+	icon: ReactNode
+	label: string
+	style?: CSSProperties
+	className?: string
+	level: number
+}
 
 const skills = [
-	{ icon: <SiHtml5 />, label: "HTML" },
-	{ icon: <SiCss3 />, label: "CSS" },
-	{ icon: <SiJavascript />, label: "JavaScript" },
-	{ icon: <SiReact />, label: "React" },
-	{ icon: <SiRedux />, label: "Redux" },
-	{ icon: <SiTailwindcss />, label: "Tailwind" },
-	{ icon: <SiCreatereactapp />, label: "ReactNative" },
+	{ icon: <SiHtml5 />, label: "HTML", level: 95 },
+	{ icon: <SiCss3 />, label: "CSS", level: 90 },
+	{ icon: <SiJavascript />, label: "JavaScript", level: 85 },
+	{ icon: <SiReact />, label: "React", level: 80 },
+	{ icon: <SiRedux />, label: "Redux", level: 75 },
+	{ icon: <SiTailwindcss />, label: "Tailwind", level: 85 },
+	{ icon: <SiCreatereactapp />, label: "ReactNative", level: 70 },
+	{ icon: <SiTypescript />, label: "TypeScript", level: 75 },
+	{ icon: <SiBootstrap />, label: "Bootstrap", level: 90 },
+	{ icon: <SiJquery />, label: "jQuery", level: 80 },
+	{ icon: <SiJest />, label: "Jest", level: 50 },
 ]
 
-function SkillCard({ icon, label, style, className }: any) {
+function SkillCard({ icon, label, level, style, className }: SkillCardProps) {
 	return (
 		<div
-			className={`absolute w-28 h-28 flex flex-col items-center justify-center bg-white/10 text-white rounded-xl backdrop-blur-md border border-white/20 shadow-lg transition-all duration-500 ease-in-out ${className}`}
+			className={`absolute w-28 h-28 px-2 flex flex-col items-center justify-center bg-white/10 text-white rounded-xl backdrop-blur-md border border-white/20 shadow-lg transition-all duration-500 ease-in-out ${className}`}
 			style={style}
 		>
 			<div className="text-2xl mb-1">{icon}</div>
 			<span className="text-xs font-semibold text-center">{label}</span>
+			<div className="w-full h-2 mt-1 bg-white/20 rounded-full overflow-hidden">
+				<div
+					className="h-full bg-accent-pink rounded-full transition-all duration-500"
+					style={{ width: `${level}%` }}
+				/>
+			</div>
 		</div>
 	)
 }
@@ -36,9 +57,14 @@ function SkillCard({ icon, label, style, className }: any) {
 export default function FrontendOrbit() {
 	const [centerIndex, setCenterIndex] = useState(0)
 
-	const handleNext = () => setCenterIndex((prev) => (prev + 1) % skills.length)
-	const handlePrev = () =>
-		setCenterIndex((prev) => (prev - 1 + skills.length) % skills.length)
+	// ✅ Auto-increment the centerIndex every 2.5 seconds
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCenterIndex((prev) => (prev + 1) % skills.length)
+		}, 2500)
+
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<div className="relative w-full flex flex-col items-center mt-16">
@@ -47,34 +73,32 @@ export default function FrontendOrbit() {
 				style={{ perspective: "1000px" }}
 			>
 				{skills.map((skill, index) => {
+					const visibleRange = 2
+					const middle = Math.floor(visibleRange / 2)
+
 					const offset = (index - centerIndex + skills.length) % skills.length
-					let angle = 0
-					let translateZ = 0
+					const relativeOffset =
+						offset <= skills.length / 2 ? offset : offset - skills.length
+
+					let rotateY = 0
 					let translateX = 0
 					let opacity = 0
 					let zIndex = 0
+					let scale = 1
 
-					if (offset === 0) {
-						angle = 0
-						translateZ = 200
-						opacity = 1
-						zIndex = 3
-					} else if (offset === 1 || offset === skills.length - 1) {
-						angle = offset === 1 ? -40 : 40
-						translateZ = 100
-						translateX = offset === 1 ? -100 : 100
-						opacity = 0.8
-						zIndex = 2
+					if (Math.abs(relativeOffset) <= middle) {
+						translateX = relativeOffset * 120
+						rotateY = relativeOffset * 30 // degrees, like a turned card
+						scale = relativeOffset === 0 ? 1 : 0.92 // center is slightly larger
+						opacity = 1 - Math.abs(relativeOffset) * 0.2
+						zIndex = visibleRange - Math.abs(relativeOffset)
 					} else {
-						angle = offset < skills.length / 2 ? -60 : 60
-						translateZ = 0
-						translateX = offset < skills.length / 2 ? -180 : 180
 						opacity = 0
 						zIndex = 0
 					}
 
 					const style = {
-						transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${angle}deg)`,
+						transform: `translateX(${translateX}px) rotateY(${rotateY}deg) scale(${scale})`,
 						opacity,
 						zIndex,
 					}
@@ -86,23 +110,49 @@ export default function FrontendOrbit() {
 							label={skill.label}
 							style={style}
 							className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+							level={skill.level}
 						/>
 					)
 				})}
 			</div>
 
-			<div className="mt-6 flex gap-4">
+			<div className="mt-8 flex gap-8 items-center justify-center">
 				<button
-					onClick={handlePrev}
-					className="px-4 py-2 bg-accent-pink text-white rounded-full hover:bg-accent-violet transition"
+					onClick={() =>
+						setCenterIndex((prev) => (prev - 1 + skills.length) % skills.length)
+					}
+					aria-label="Previous skill"
+					className="w-10 h-10 flex items-center justify-center border border-white text-white rounded-full hover:scale-110 transition-transform duration-300"
 				>
-					◀
+					<svg
+						className="w-4 h-4"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="white"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<polyline points="15 18 9 12 15 6" />
+					</svg>
 				</button>
+
 				<button
-					onClick={handleNext}
-					className="px-4 py-2 bg-accent-pink text-white rounded-full hover:bg-accent-violet transition"
+					onClick={() => setCenterIndex((prev) => (prev + 1) % skills.length)}
+					aria-label="Next skill"
+					className="w-10 h-10 flex items-center justify-center border border-white text-white rounded-full hover:scale-110 transition-transform duration-300"
 				>
-					▶
+					<svg
+						className="w-4 h-4"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="white"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<polyline points="9 18 15 12 9 6" />
+					</svg>
 				</button>
 			</div>
 		</div>
