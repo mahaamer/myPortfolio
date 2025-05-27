@@ -25,9 +25,15 @@ export default function About() {
 				viewport={{ once: true }}
 			>
 				<div className="max-w-[600px] text-lg md:text-xl leading-relaxed">
-					<h2 className="text-3xl md:text-4xl font-bold text-accent-pink mb-4">
+					<motion.h2
+						className="text-3xl md:text-5xl font-bold mb-4 text-[#ec4899]"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}
+					>
 						About Me
-					</h2>
+					</motion.h2>
+
 					<p className="text-neutral-slate">
 						I am Maha Amer, a React Native and MERN full-stack developer
 						passionate about building elegant and performant user interfaces. I
