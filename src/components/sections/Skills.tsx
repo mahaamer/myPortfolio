@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import {
+	PiBracketsCurlyBold,
 	PiBrowsersBold,
 	PiChatsCircleBold,
 	PiCloudBold,
@@ -14,7 +15,7 @@ import FrontendOrbit from "../ui/FrontendOrbit"
 const skillGroups = [
 	{
 		title: "Frontend",
-		icon: <PiBrowsersBold className="text-3xl text-accent-pink" />,
+		icon: <PiBrowsersBold className="text-3xl text-white/80" />,
 		skills: ["HTML", "CSS", "JavaScript", "React", "Redux"],
 	},
 	{
@@ -55,7 +56,7 @@ const skillGroups = [
 	},
 	{
 		title: "Documentation & Collaboration",
-		icon: <PiChatsCircleBold className="text-3xl text-accent-pink" />,
+		icon: <PiChatsCircleBold className="text-3xl text-white/80" />,
 		skills: ["Technical writing", "Jira", "Confluence", "Agile workflows"],
 	},
 	{
@@ -73,18 +74,35 @@ export default function Skills() {
 			aria-labelledby="skills-heading"
 		>
 			<div className="max-w-6xl mx-auto text-center">
-				<h2
-					id="skills-heading"
-					className="text-3xl md:text-4xl font-bold text-accent-pink mb-16"
+				{/* Fancy Smart Heading */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					viewport={{ once: true }}
+					className="flex flex-col items-center mb-16"
 				>
-					My Skill Set
-				</h2>
+					<span className="text-sm uppercase tracking-wider text-white/60">
+						What I Do Best
+					</span>
+					<div className="flex items-center gap-3 mt-1">
+						<PiBracketsCurlyBold className="text-2xl text-accent-pink" />
+						<h2
+							id="skills-heading"
+							className="text-3xl md:text-4xl font-extrabold text-accent-pink tracking-tight"
+						>
+							My Skill Set
+						</h2>
+					</div>
+					<div className="w-12 h-[2px] bg-accent-pink mt-2 rounded-full" />
+				</motion.div>
 
+				{/* Skill Grid */}
 				<div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
 					{skillGroups.map((group, idx) => (
 						<motion.div
 							key={idx}
-							className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl shadow-lg p-6 flex flex-col items-center hover:scale-[1.02] transition-transform"
+							className="group bg-gradient-to-br from-pink-500/30 to-violet-500/30 rounded-3xl p-6 flex flex-col items-center hover:scale-[1.05] transition-transform duration-300"
 							initial={{ opacity: 0, y: 30 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: idx * 0.1 }}
@@ -92,15 +110,21 @@ export default function Skills() {
 							role="group"
 							aria-labelledby={`group-${idx}`}
 						>
-							<div className="mb-4">{group.icon}</div>
+							{/* Icon */}
+							<div className="mb-4 transition-transform duration-300 group-hover:scale-110">
+								{group.icon}
+							</div>
+
+							{/* Title */}
 							<h3
 								id={`group-${idx}`}
-								className="text-xl font-semibold text-accent-pink mb-4"
+								className="text-xl font-bold text-white mb-4 transition-all duration-300 group-hover:text-accent-pink group-hover:underline underline-offset-4 tracking-wide"
 							>
 								{group.title}
 							</h3>
 
-							{group.title === "Frontend" ? (
+							{/* Content */}
+							{group.title === "Frontend" || "Backend" ? (
 								<FrontendOrbit />
 							) : (
 								<ul className="text-sm text-neutral-slate space-y-1 text-left">
@@ -119,6 +143,7 @@ export default function Skills() {
 				</div>
 			</div>
 
+			{/* Blurred background accents */}
 			<div
 				className="absolute -top-10 -left-10 w-40 h-40 bg-accent-pink/10 rounded-full blur-3xl"
 				aria-hidden="true"
