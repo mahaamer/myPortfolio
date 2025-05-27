@@ -164,7 +164,7 @@ export default function SkillsSection() {
 									/>
 								</div>
 								<div className="relative w-full text-center mt-1">
-									<span className="inline-block px-3 py-1 text-[11px] font-medium text-pink-400 bg-white/5 border border-white/10 rounded-full shadow-sm backdrop-blur-sm">
+									<span className="inline-block px-3 py-1 text-[14px] font-medium text-pink-400 bg-white/5 border border-white/10 rounded-full shadow-sm backdrop-blur-sm">
 										{percentage}% Proficiency
 									</span>
 								</div>
