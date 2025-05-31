@@ -1,77 +1,163 @@
 "use client"
+import { ProjectCard } from "@/components/ui/ProjectCard"
 import { motion } from "framer-motion"
-import { FaBuilding, FaFlask, FaMobileAlt } from "react-icons/fa"
 
 const projects = [
 	{
 		title: "Student Timetable Optimizer API",
-		icon: <FaFlask className="text-pink-400" size={32} />,
+		duration: "Feb 2025 - Mar 2025",
 		company: "Freelancer.com",
-		date: "Feb 2025 - Mar 2025",
-		desc: "AI-powered scheduling engine using Flask + metaheuristics (Grey Wolf / PSO). Built to handle 1,000+ students with <1s response.",
-		tech: ["Python", "Flask", "SQLite", "Mealpy", "Docker"],
+		image: "/api-preview.png",
+		images: ["/api-preview.png", "/backendDoc.png"],
+		description:
+			"Designed a full-stack back-end API that generates personalized timetables using metaheuristic optimization.",
+		highlights: [
+			"Schedules generated <1s for 1,000 students",
+			"JWT-secured endpoints, admin panel, Swagger docs",
+			"Optimized algorithms improved mean fitness by 37%",
+		],
+		tech: ["Python", "Flask", "SQLite", "SQLAlchemy", "Mealpy"],
+		links: [
+			{
+				type: "github",
+				url: "https://github.com/mahaamer/OptimizedSchedulingSystem",
+			},
+		],
 	},
 	{
 		title: "Noury – Smart Fridge Mobile App",
-		icon: <FaMobileAlt className="text-indigo-400" size={32} />,
+		duration: "May 2023 - Jun 2024",
 		company: "noury AG",
-		date: "May 2023 - Jun 2024",
-		desc: "IoT shopping app using React Native, Redux, and real-time payments. Seamless UX for fridge access, cart, and checkouts.",
-		tech: ["React Native", "Redux", "Firebase", "Datatrans", "TypeScript"],
+		image: "/noury-preview.png",
+		images: ["/socialSignup.png", "/openFridge.png", "/scan.png"],
+		description:
+			"Built the front-end for an IoT-enabled retail app that unlocks smart fridges and handles secure mobile payments.",
+		highlights: [
+			"Real-time control, secure payments, app store live",
+			"Checkout time <15s, reduced support tickets by 40%",
+			"Offline persistence with Redux, TypeScript-based architecture",
+		],
+		tech: [
+			"React Native",
+			"Redux Toolkit",
+			"Firebase",
+			"Datatrans API",
+			"TypeScript",
+		],
+		links: [
+			{
+				type: "appstore",
+				url: "https://apps.apple.com/ch/app/noury/id1577361582",
+			},
+		],
 	},
 	{
-		title: "Suomo El Asala – Real Estate Platform",
-		icon: <FaBuilding className="text-green-400" size={32} />,
-		company: "ITI",
-		date: "Aug 2022 - Dec 2022",
-		desc: "Bilingual real estate CMS with 3D galleries, CRM integration, and lightning-fast search. Built with MERN stack.",
-		tech: ["React", "Node.js", "MongoDB", "Material UI"],
+		title: "Suomo El Asala – Real-Estate Platform",
+		duration: "Aug 2022 - Dec 2022",
+		company: "Information Technology Institute (ITI)",
+		image: "/suomo-preview.png",
+		images: [
+			"/Summo-alasalh.png",
+			"/Summo-alasalh-projects.png",
+			"/React-App-admindashboard.png",
+		],
+		description:
+			"Engineered a bilingual full-stack platform to showcase projects with real-time CRM integration and lead tracking.",
+		highlights: [
+			"CMS for self-service publishing (images/content)",
+			"Dark/light mode, CDN-cached fast UI (<1s)",
+			"Multilingual UI, CRM integration, instant search",
+		],
+		tech: ["React.js", "Redux", "Node.js", "MongoDB", "Material UI"],
+		links: [
+			{
+				type: "live",
+				url: "https://smou-finale-fornt.vercel.app/",
+			},
+		],
 	},
 ]
 
-export default function ProjectsSection() {
+const Projects = () => {
 	return (
-		<section className="bg-[#0f0f25] py-16 px-6" id="projects">
+		<section
+			id="projects"
+			className="relative px-4 md:px-8 lg:px-16 py-20 bg-[#0f172a] text-white max-w-[1600px] mx-auto"
+		>
 			<motion.h2
-				className="text-4xl text-center font-bold text-white mb-12"
-				initial={{ opacity: 0, y: -20 }}
-				animate={{ opacity: 1, y: 0 }}
+				className="text-4xl md:text-5xl font-bold text-pink-500 mb-12 text-center"
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}
 			>
-				💼 Projects
+				My Projects
 			</motion.h2>
 
-			<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-				{projects.map((p, i) => (
-					<motion.div
-						key={i}
-						className="bg-[#1e1e35] rounded-2xl border border-purple-500/20 shadow-[0_0_30px_rgba(168,85,247,0.3)] p-6 hover:scale-105 transition-transform duration-300 backdrop-blur-xl"
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, delay: i * 0.1 }}
-					>
-						<div className="flex items-center gap-4 mb-4">
-							<div className="bg-purple-600/20 p-3 rounded-full">{p.icon}</div>
-							<div>
-								<h3 className="text-xl font-semibold text-white">{p.title}</h3>
-								<p className="text-sm text-gray-400">{p.company}</p>
-								<p className="text-xs text-purple-300 italic">{p.date}</p>
-							</div>
+			<div className="grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-3 gap-8">
+				{/* Top Right: Project 1 */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+					viewport={{ once: false, amount: 0.4 }}
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-1 lg:ml-4"
+				>
+					<ProjectCard {...projects[0]} />
+				</motion.div>
+
+				{/* Middle Left: Project 2 */}
+				{/* Middle Left: Project 2 */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					viewport={{ once: false, amount: 0.4 }}
+					className="lg:col-start-1 lg:col-span-3 lg:row-start-2"
+				>
+					<div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
+						{/* Project Card */}
+						<div className="w-full">
+							<ProjectCard {...projects[1]} />
 						</div>
-						<p className="text-sm text-gray-300 mb-4">{p.desc}</p>
-						<div className="flex flex-wrap gap-2">
-							{p.tech.map((t, j) => (
-								<span
-									key={j}
-									className="text-xs px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full text-white"
-								>
-									{t}
-								</span>
-							))}
-						</div>
-					</motion.div>
-				))}
+
+						{/* Avatar – hidden on small, visible on large */}
+						<img
+							src="/noury-illustration.png"
+							alt="Noury presentation"
+							className="hidden lg:block w-60 rounded-xl shadow-xl"
+						/>
+					</div>
+				</motion.div>
+
+				{/* Bottom Right: Project 3 */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.4 }}
+					viewport={{ once: false, amount: 0.4 }}
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-3 lg:mr-4"
+				>
+					<ProjectCard {...projects[2]} />
+				</motion.div>
 			</div>
+			<motion.div
+				animate={{ opacity: [0.8, 0.5, 0.8], scale: [0.9, 1, 0.9] }}
+				transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+				className="absolute -top-0 -left-32 w-[400px] h-[400px] hidden lg:block bg-accent-slate40 rounded-full blur-[150px] opacity-40"
+			/>
+
+			<motion.div
+				animate={{ opacity: [0.8, 0.5, 0.8], scale: [0.95, 1, 0.95] }}
+				transition={{
+					duration: 7,
+					repeat: Infinity,
+					repeatDelay: 1,
+					ease: "easeInOut",
+				}}
+				className="absolute  hidden lg:block bottom-[-10px] right-[-80px] w-[300px] h-[300px] bg-violet-500 rounded-full blur-[120px] opacity-20 -z-0"
+			/>
 		</section>
 	)
 }
+
+export default Projects

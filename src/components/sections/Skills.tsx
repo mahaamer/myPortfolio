@@ -126,7 +126,7 @@ export default function SkillsSection() {
 			id="skills"
 			className="relative w-full px-6 py-20 md:py-28 bg-[#0f172a] overflow-hidden"
 		>
-			<div className="max-w-5xl mx-auto text-center">
+			<div className="max-w-5xl mx-auto text-center z-20">
 				<motion.h2
 					className="text-3xl md:text-5xl font-bold mb-4 text-[#ec4899]"
 					initial={{ opacity: 0, y: 20 }}
@@ -144,7 +144,7 @@ export default function SkillsSection() {
 					Clean code. Intuitive UX. Scalable architecture.
 				</motion.p>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 z-20">
 					{skills.map(
 						({ category, icon, topSkills, moreSkills, percentage }, index) => (
 							<motion.div
@@ -186,7 +186,7 @@ export default function SkillsSection() {
 								{moreSkills.length > 0 && (
 									<button
 										onClick={() => toggleMore(category)}
-										className="text-sm mt-4 text-[#6366f1] underline hover:text-[#4f46e5] transition-colors"
+										className="text-sm mt-4 text-[#6366f1] underline hover:text-[#4f46e5] transition-colors z-20"
 									>
 										{expanded[category] ? "Show Less" : "+ More"}
 									</button>
@@ -196,31 +196,24 @@ export default function SkillsSection() {
 					)}
 				</div>
 			</div>
+			{/* Background Blobs */}
+			{/* Background Blobs – hidden on mobile and tablet */}
+
 			<motion.div
-				animate={{
-					opacity: [0.8, 0.5, 0.8],
-					scale: [0.9, 1, 0.9],
-				}}
-				transition={{
-					duration: 6,
-					repeat: Infinity,
-					ease: "easeInOut",
-				}}
-				className="absolute -bottom-10 -left-32 w-[300px] h-[300px] bg-pink-500 rounded-full blur-[150px] opacity-20 z-0"
+				animate={{ opacity: [0.8, 0.5, 0.8], scale: [0.9, 1, 0.9] }}
+				transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+				className="absolute -top-0 -left-32 w-[400px] h-[400px] hidden lg:block bg-pink-500 rounded-full blur-[150px] opacity-40"
 			/>
 
 			<motion.div
-				animate={{
-					opacity: [0.8, 0.5, 0.8],
-					scale: [0.95, 1, 0.95],
-				}}
+				animate={{ opacity: [0.8, 0.5, 0.8], scale: [0.95, 1, 0.95] }}
 				transition={{
 					duration: 7,
 					repeat: Infinity,
 					repeatDelay: 1,
 					ease: "easeInOut",
 				}}
-				className="absolute bottom-[-100px] right-[-80px] w-[400px] h-[400px] bg-violet-500 rounded-full blur-[120px] opacity-20 z-0"
+				className="absolute  hidden lg:block top-[-10px] right-[-80px] w-[200px] h-[200px] bg-violet-500 rounded-full blur-[120px] opacity-20 -z-0"
 			/>
 		</section>
 	)
