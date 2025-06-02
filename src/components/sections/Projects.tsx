@@ -100,7 +100,7 @@ const Projects = () => {
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 					viewport={{ once: false, amount: 0.4 }}
-					className="lg:col-start-4 lg:col-span-3 lg:row-start-1 lg:ml-4"
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-1 lg:mr-7"
 				>
 					<ProjectCard {...projects[0]} />
 				</motion.div>
@@ -114,17 +114,14 @@ const Projects = () => {
 					viewport={{ once: false, amount: 0.4 }}
 					className="lg:col-start-1 lg:col-span-3 lg:row-start-2"
 				>
-					<div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
-						{/* Project Card */}
-						<div className="w-full">
+					<div className="flex flex-col md:flex-row gap-4 items-start justify-between w-full">
+						<div className="w-full min-h-[260px] mr-[20%]">
 							<ProjectCard {...projects[1]} />
 						</div>
-
-						{/* Avatar – hidden on small, visible on large */}
 						<img
 							src="/noury-illustration.png"
 							alt="Noury presentation"
-							className="hidden lg:block w-60 rounded-xl shadow-xl"
+							className="hidden lg:block w-52 max-h-[260px] object-contain rounded-xl shadow-xl"
 						/>
 					</div>
 				</motion.div>
@@ -135,7 +132,7 @@ const Projects = () => {
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.4 }}
 					viewport={{ once: false, amount: 0.4 }}
-					className="lg:col-start-4 lg:col-span-3 lg:row-start-3 lg:mr-4"
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-3 lg:mr-7"
 				>
 					<ProjectCard {...projects[2]} />
 				</motion.div>
