@@ -1,4 +1,5 @@
 import About from "@/components/sections/About"
+import CertificationsSection from "@/components/sections/Certifications"
 import Hero from "@/components/sections/Hero"
 import ProjectsSection from "@/components/sections/Projects"
 import Skills from "@/components/sections/Skills"
@@ -13,6 +14,7 @@ export default function Home() {
 			<ProjectsSection />
 
 			<TimelineSection />
+			<CertificationsSection />
 			{/* <CertificationsSection />
 			<Contact /> */}
 		</main>
