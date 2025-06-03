@@ -1,5 +1,7 @@
 import About from "@/components/sections/About"
 import CertificationsSection from "@/components/sections/Certifications"
+import ContactSection from "@/components/sections/Contact"
+import GallerySection from "@/components/sections/Gallery"
 import Hero from "@/components/sections/Hero"
 import ProjectsSection from "@/components/sections/Projects"
 import Skills from "@/components/sections/Skills"
@@ -15,8 +17,8 @@ export default function Home() {
 
 			<TimelineSection />
 			<CertificationsSection />
-			{/* <CertificationsSection />
-			<Contact /> */}
+			<GallerySection />
+			<ContactSection />
 		</main>
 	)
 }
