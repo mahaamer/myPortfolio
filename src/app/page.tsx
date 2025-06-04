@@ -6,6 +6,7 @@ import Hero from "@/components/sections/Hero"
 import ProjectsSection from "@/components/sections/Projects"
 import Skills from "@/components/sections/Skills"
 import TimelineSection from "@/components/sections/TimelineSection"
+import ScrollToTopButton from "@/components/ui/ScrollToTopButton"
 
 export default function Home() {
 	return (
@@ -14,7 +15,7 @@ export default function Home() {
 			<About />
 			<Skills />
 			<ProjectsSection />
-
+			<ScrollToTopButton />
 			<TimelineSection />
 			<CertificationsSection />
 			<GallerySection />
