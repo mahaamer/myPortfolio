@@ -3,7 +3,7 @@
 import { useForm, ValidationError } from "@formspree/react"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa"
+import { FaFilePdf, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa"
 
 export default function ContactSection() {
 	const [state, handleSubmit] = useForm("mvgronqe")
@@ -136,7 +136,7 @@ export default function ContactSection() {
 								className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-green-600 text-green-600 bg-white hover:bg-green-600 hover:text-white transition w-full md:w-auto"
 							>
 								<FaWhatsapp className="text-lg" />
-								Contact in WhatsApp
+								Chat On WhatsApp
 							</button>
 						</div>
 					</form>
@@ -160,9 +160,18 @@ export default function ContactSection() {
 					href="https://www.linkedin.com/in/mahaamer"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="p-3 rounded-full border border-gray-500 hover:bg-gray-700 transition text-xl text-white"
+					className="p-3 rounded-full border border-gray-500 hover:bg-blue-700 transition text-xl text-white"
 				>
 					<FaLinkedin />
+				</a>
+				<a
+					href="/Maha_Amer_Frontend_Fullstack_CV_2025.pdf"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-red-500 text-red-500 bg-white hover:bg-red-600 hover:text-white transition w-full md:w-auto"
+				>
+					<FaFilePdf className="text-lg" />
+					Preview CV
 				</a>
 			</div>
 
