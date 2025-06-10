@@ -186,7 +186,7 @@ export default function SkillsSection() {
 								{moreSkills.length > 0 && (
 									<button
 										onClick={() => toggleMore(category)}
-										className="text-sm mt-4 text-[#6366f1] underline hover:text-[#4f46e5] transition-colors z-20"
+										className="text-sm mt-4 text-[#6366f1] underline hover:text-[#4f46e5] transition-colors z-20 cursor-pointer"
 									>
 										{expanded[category] ? "Show Less" : "+ More"}
 									</button>

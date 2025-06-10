@@ -1,9 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
+import { motion, useAnimation } from "framer-motion"
+import { useEffect, useState } from "react"
 
+// Your certifications data
 const originalCerts = [
 	{
 		title: "University Graduation Certificate",
@@ -67,30 +67,31 @@ const originalCerts = [
 	},
 ]
 
-const visibleCards = 3
-
 export default function CertificationsSection() {
-	const [currentIndex, setCurrentIndex] = useState(0)
 	const [selectedCert, setSelectedCert] = useState<string | null>(null)
-	const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+	const setIsHovered = useState(false)[1]
 
-	const resetTimeout = () => {
-		if (timeoutRef.current) clearTimeout(timeoutRef.current)
+	const controls = useAnimation()
+
+	const loopedCerts = [...originalCerts, ...originalCerts] // smooth infinite scroll
+
+	const variants = {
+		scroll: {
+			x: ["0%", "-50%"],
+			transition: {
+				duration: 30,
+				ease: "linear",
+				repeat: Infinity,
+			},
+		},
+		stop: {
+			transition: { duration: 0 },
+		},
 	}
 
 	useEffect(() => {
-		resetTimeout()
-		timeoutRef.current = setTimeout(() => {
-			setCurrentIndex((prev) => (prev + 1) % originalCerts.length)
-		}, 5000)
-		return () => resetTimeout()
-	}, [currentIndex])
-
-	const getVisibleCerts = () => {
-		return Array.from({ length: visibleCards }, (_, i) => {
-			return originalCerts[(currentIndex + i) % originalCerts.length]
-		})
-	}
+		controls.start("scroll")
+	}, [controls])
 
 	return (
 		<section className="bg-[#0f172a] text-white py-20 px-4" id="certifications">
@@ -103,71 +104,57 @@ export default function CertificationsSection() {
 				Licenses & Certifications
 			</motion.h2>
 
-			<div className="relative max-w-7xl mx-auto px-4">
-				<button
-					className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-[rgba(236,27,153,0.2)] border border-pink-600 hover:bg-gray-100 transition"
-					onClick={() =>
-						setCurrentIndex(
-							(prev) => (prev - 1 + originalCerts.length) % originalCerts.length
-						)
-					}
+			<div
+				className="relative max-w-7xl mx-auto overflow-hidden px-4"
+				onMouseEnter={() => {
+					setIsHovered(true)
+					controls.stop()
+				}}
+				onMouseLeave={() => {
+					setIsHovered(false)
+					controls.start("scroll")
+				}}
+			>
+				<motion.div
+					className="flex gap-6 w-max"
+					variants={variants}
+					animate={controls}
+					initial="scroll"
 				>
-					<IoIosArrowBack className="text-pink-600 text-3xl" />
-				</button>
-
-				<button
-					className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-[rgba(236,27,153,0.2)] border border-pink-600 hover:bg-gray-100 transition"
-					onClick={() =>
-						setCurrentIndex((prev) => (prev + 1) % originalCerts.length)
-					}
-				>
-					<IoIosArrowForward className="text-pink-600 text-3xl" />
-				</button>
-
-				<div className="overflow-hidden">
-					<motion.div
-						className="flex gap-6"
-						initial={{ x: 0 }}
-						animate={{ x: 0 }}
-						transition={{ ease: "easeInOut", duration: 0.4 }}
-					>
-						{getVisibleCerts().map((cert, i) => (
-							<div
-								key={i}
-								onClick={() => setSelectedCert(cert.image)}
-								className="min-w-[320px] max-w-[320px] h-[390px] bg-slate-900 border border-slate-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between p-5 hover:border-white hover:bg-[#232334]"
-							>
-								<div>
-									<img
-										src={cert.image}
-										alt={cert.title}
-										className="w-full h-32 object-cover rounded-md mb-4 border border-gray-100"
-									/>
-									<h3 className="text-pink-500 font-semibold text-base leading-snug mb-1">
-										{cert.title.length > 42
-											? cert.title.slice(0, 40) + "..."
-											: cert.title}
-									</h3>
-									<p className="text-sm text-gray-400">{cert.org}</p>
-									<p className="text-xs italic text-pink-300 mt-1">
-										{cert.date}
-									</p>
-								</div>
-
-								<div className="flex flex-wrap gap-2 mt-3">
-									{cert.skills.map((s, j) => (
-										<span
-											key={j}
-											className="text-xs px-3 py-1 bg-slate-800 text-gray-300 border border-gray-700 rounded-full"
-										>
-											{s}
-										</span>
-									))}
-								</div>
+					{loopedCerts.map((cert, i) => (
+						<div
+							key={i}
+							onClick={() => setSelectedCert(cert.image)}
+							className="min-w-[230px] max-w-[230px] h-[360px] bg-slate-900 border border-slate-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between px-4 py-5 hover:border-white hover:bg-[#232334]"
+						>
+							<div>
+								<img
+									src={cert.image}
+									alt={cert.title}
+									className="w-full h-28 object-cover rounded-md mb-3 border border-gray-100"
+								/>
+								<h3 className="text-pink-500 font-semibold text-sm leading-snug mb-1">
+									{cert.title.length > 36
+										? cert.title.slice(0, 34) + "..."
+										: cert.title}
+								</h3>
+								<p className="text-xs text-gray-400">{cert.org}</p>
+								<p className="text-xs italic text-pink-300 mt-1">{cert.date}</p>
 							</div>
-						))}
-					</motion.div>
-				</div>
+
+							<div className="flex flex-wrap gap-2 mt-3">
+								{cert.skills.map((s, j) => (
+									<span
+										key={j}
+										className="text-[10px] px-2 py-0.5 bg-slate-800 text-gray-300 border border-gray-700 rounded-full"
+									>
+										{s}
+									</span>
+								))}
+							</div>
+						</div>
+					))}
+				</motion.div>
 			</div>
 
 			{/* Modal */}

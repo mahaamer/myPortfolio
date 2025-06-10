@@ -37,7 +37,7 @@ export default function ScrollButton({
 			onClick={handleClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			className={`relative text-lg px-6 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white cursor-pointer`}
+			className={`relative mt-5 text-lg px-6 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white text-white cursor-pointer`}
 			aria-label={`Scroll to ${targetId}`}
 			initial={false}
 			whileHover={{ y: -10 }} // slight jump

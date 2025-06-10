@@ -34,12 +34,77 @@ export default function About() {
 						About Me
 					</motion.h2>
 
-					<p className="text-neutral-slate">
+					<motion.p
+						className="text-sm sm:text-base text-neutral-400 leading-relaxed"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}
+					>
 						I am Maha Amer, a React Native and MERN full-stack developer
 						passionate about building elegant and performant user interfaces. I
 						love blending design with logic to create inclusive, accessible web
 						experiences that feel delightful.
-					</p>
+					</motion.p>
+
+					<motion.p
+						className="text-sm sm:text-base text-neutral-400 leading-relaxed mt-3"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}
+					>
+						Over the past 1.5 years, I've delivered cross-platform apps and
+						dashboards for international clients, specializing in QR-code
+						onboarding, multilingual UX, and secure payment systems. I'm
+						currently pursuing a Master's in AI, focused on explainable
+						transformer-based recommender systems—blending engineering with
+						research to build intelligent, user-centric platforms.
+					</motion.p>
+					{/* Keywords */}
+					{/* Professional Skills */}
+					<motion.div
+						className="flex flex-wrap gap-2 mt-6 text-sm text-neutral-300 font-medium"
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
+						transition={{ delay: 0.3, duration: 0.6 }}
+					>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							React Native Development
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Full-Stack Web (MERN)
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							TypeScript & ES6+
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							GraphQL & REST APIs
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							i18n & Localization
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Tokenized Payment Integration
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Firebase Auth & Onboarding
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Redux Toolkit & React Navigation
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							UI/UX Prototyping
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Explainable AI & Recommender Systems
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							AWS Cloud Services
+						</span>
+						<span className="px-3 py-1 bg-neutral-800 rounded-full">
+							Agile & Technical Documentation
+						</span>
+					</motion.div>
+
 					<motion.div
 						whileHover="hovered"
 						whileTap="hovered"

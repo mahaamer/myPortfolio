@@ -11,7 +11,7 @@ const icons = [
 	},
 	{
 		src: "/icons/twilandcss.png",
-		className: "bottom-32 left-28",
+		className: "bottom-10 left-28",
 		dir: -15,
 		dur: 3.5,
 	},

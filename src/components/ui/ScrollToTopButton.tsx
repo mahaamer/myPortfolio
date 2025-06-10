@@ -48,10 +48,10 @@ export default function ScrollToTopButton() {
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: 10 }}
 								transition={{ duration: 0.25 }}
-								className="absolute bottom-16 right-0 bg-slate-800/90 backdrop-blur-sm rounded-full px-4 py-2 flex gap-4 items-center border border-slate-600 shadow-xl"
+								className="absolute bottom-16 right-0 bg-slate-800/90 backdrop-blur-sm rounded-full px-4 py-2 flex gap-4 items-center border border-slate-600 shadow-xl cursor-pointer"
 							>
 								<a
-									href="https://wa.me/yourNumber"
+									href="https://wa.me/201003765461"
 									target="_blank"
 									title="WhatsApp"
 								>

@@ -94,19 +94,18 @@ const Projects = () => {
 			</motion.h2>
 
 			<div className="grid grid-cols-1 lg:grid-cols-6 lg:grid-rows-3 gap-8">
-				{/* Top Right: Project 1 */}
+				{/* Project 1: Top Right */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 					viewport={{ once: false, amount: 0.4 }}
-					className="lg:col-start-4 lg:col-span-3 lg:row-start-1 lg:mr-7"
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-1"
 				>
 					<ProjectCard {...projects[0]} />
 				</motion.div>
 
-				{/* Middle Left: Project 2 */}
-				{/* Middle Left: Project 2 */}
+				{/* Project 2: Middle Left */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -114,29 +113,36 @@ const Projects = () => {
 					viewport={{ once: false, amount: 0.4 }}
 					className="lg:col-start-1 lg:col-span-3 lg:row-start-2"
 				>
-					<div className="flex flex-col md:flex-row gap-4 items-start justify-between w-full">
-						<div className="w-full min-h-[260px] mr-[20%]">
-							<ProjectCard {...projects[1]} />
-						</div>
-						<img
-							src="/noury-illustration.png"
-							alt="Noury presentation"
-							className="hidden lg:block w-52 max-h-[260px] object-contain rounded-xl shadow-xl"
-						/>
-					</div>
+					<ProjectCard {...projects[1]} />
 				</motion.div>
 
-				{/* Bottom Right: Project 3 */}
+				{/* Optional: Noury image as standalone card */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: 0.3 }}
+					viewport={{ once: false, amount: 0.4 }}
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-2"
+				>
+					<img
+						src="/noury-illustration.png"
+						alt="Noury presentation"
+						className="w-full h-auto max-h-[260px] object-contain rounded-xl "
+					/>
+				</motion.div>
+
+				{/* Project 3: Bottom Left */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5, delay: 0.4 }}
 					viewport={{ once: false, amount: 0.4 }}
-					className="lg:col-start-4 lg:col-span-3 lg:row-start-3 lg:mr-7"
+					className="lg:col-start-4 lg:col-span-3 lg:row-start-3"
 				>
 					<ProjectCard {...projects[2]} />
 				</motion.div>
 			</div>
+
 			<motion.div
 				animate={{ opacity: [0.8, 0.5, 0.8], scale: [0.9, 1, 0.9] }}
 				transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}

@@ -20,6 +20,7 @@ export default function Navbar() {
 	const [hoveredLink, setHoveredLink] = useState<string | null>(null)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+	// Change navbar background on scroll
 	useEffect(() => {
 		const handleScroll = () => {
 			setScrolled(window.scrollY > 20)
@@ -28,6 +29,7 @@ export default function Navbar() {
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
 
+	// Prevent body scroll when mobile menu is open
 	useEffect(() => {
 		if (isMenuOpen && window.innerWidth < 768) {
 			document.body.style.overflow = "hidden"
@@ -35,6 +37,33 @@ export default function Navbar() {
 			document.body.style.overflow = ""
 		}
 	}, [isMenuOpen])
+
+	// IntersectionObserver to track visible sections for active link
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						// Set active link matching section; ex: "#about"
+						setActive(`#${entry.target.id}`)
+					}
+				})
+			},
+			{
+				root: null,
+				rootMargin: "0px",
+				threshold: 0.3,
+			}
+		)
+
+		navItems.forEach(({ href }) => {
+			const id = href.replace("#", "")
+			const el = document.getElementById(id)
+			if (el) observer.observe(el)
+		})
+
+		return () => observer.disconnect()
+	}, [])
 
 	return (
 		<motion.header
@@ -112,13 +141,11 @@ export default function Navbar() {
 
 				{isMenuOpen && (
 					<>
-						{/* Blur overlay behind the menu */}
 						<div
 							className="fixed inset-0 z-30 backdrop-blur-sm bg-black/30 md:hidden"
 							onClick={() => setIsMenuOpen(false)}
 							aria-hidden="true"
 						/>
-						{/* Mobile menu */}
 						<motion.ul
 							initial={{ opacity: 0, y: -10 }}
 							animate={{ opacity: 1, y: 0 }}
