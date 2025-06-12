@@ -14,7 +14,7 @@ type ProjectCardProps = {
 	image?: string
 	images?: string[]
 	links: {
-		type: "github" | "live" | "appstore"
+		type: string
 		url: string
 	}[]
 }
