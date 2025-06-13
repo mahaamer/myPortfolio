@@ -37,7 +37,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 					initial={{ opacity: 0, scale: 0.95 }}
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.95 }}
-					className="w-full max-w-xl rounded-2xl backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg p-6 text-white"
+					className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl h-auto sm:h-[90vh] overflow-y-auto rounded-2xl backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg p-4 sm:p-6 text-white"
 				>
 					<div className="flex justify-between items-start mb-4">
 						<Dialog.Title className="text-xl font-bold">{title}</Dialog.Title>
