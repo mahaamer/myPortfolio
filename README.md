@@ -23,7 +23,6 @@ Welcome to my personal portfolio website built with **Next.js**, **Tailwind CSS*
 |-----------------------------------|--------------------------------------|--------------------------------------|
 | ![Home Screenshot](./public/home.png) | ![Projects Screenshot](./public/projects.png) | ![Certs Screenshot](./public/certs.png) |
 
-> 📁 **Note:** Place your screenshots inside `public/screenshots/` directory in your project folder.
 
 ---
 
