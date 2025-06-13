@@ -109,24 +109,29 @@ export default function GallerySection() {
 				Moments I'm Proud Of
 			</motion.h2>
 
-			<div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4 max-w-6xl mx-auto">
+			<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
 				{galleryItems.map((item, index) => {
 					const heightClass = getRandomHeight()
 					return (
 						<motion.div
 							key={index}
-							initial={{ opacity: 0, scale: 0.9 }}
+							initial={{ opacity: 0, scale: 0.95 }}
 							whileInView={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.4, delay: index * 0.1 }}
-							className={`break-inside-avoid cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition duration-300 bg-white/5`}
+							className="cursor-pointer group overflow-hidden rounded-xl bg-white/5 shadow hover:shadow-xl transition-all"
 							onClick={() => setSelected(item)}
 						>
-							<img
-								src={item.src}
-								alt={item.title}
-								className={`w-full object-cover rounded-xl ${heightClass}`}
-							/>
-							<div className="p-3 text-sm text-center text-gray-300">
+							<div className="relative aspect-[4/3] overflow-hidden">
+								<img
+									src={item.src}
+									alt={item.title}
+									className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+								/>
+								<div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-sm font-semibold transition-opacity duration-300">
+									Click to Preview
+								</div>
+							</div>
+							<div className="p-2 text-xs sm:text-sm text-center text-gray-300 line-clamp-2">
 								{item.title}
 							</div>
 						</motion.div>
@@ -140,17 +145,52 @@ export default function GallerySection() {
 					className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
 					onClick={() => setSelected(null)}
 				>
-					<div className="bg-slate-900 max-w-lg w-full rounded-xl p-6 text-center relative">
+					<div
+						className="bg-slate-900 max-w-lg w-full rounded-xl p-6 text-center relative"
+						onClick={(e) => e.stopPropagation()} // prevent modal from closing on inner click
+					>
+						{/* Close Button */}
 						<button
 							onClick={() => setSelected(null)}
-							className="absolute top-2 right-4 text-white text-2xl hover:text-pink-500"
+							className="absolute top-2 right-4 text-white text-2xl hover:text-pink-500 cursor-pointer"
 						>
 							&times;
 						</button>
+
+						{/* Navigation Buttons */}
+						<button
+							className="absolute left-2 top-1/2 -translate-y-1/2 text-white text-3xl hover:text-pink-400 cursor-pointer"
+							onClick={(e) => {
+								e.stopPropagation()
+								const currentIndex = galleryItems.findIndex(
+									(i) => i.src === selected.src
+								)
+								const prev =
+									(currentIndex - 1 + galleryItems.length) % galleryItems.length
+								setSelected(galleryItems[prev])
+							}}
+						>
+							&#8592;
+						</button>
+						<button
+							className="absolute right-2 top-1/2 -translate-y-1/2 text-white text-3xl hover:text-pink-400 cursor-pointer"
+							onClick={(e) => {
+								e.stopPropagation()
+								const currentIndex = galleryItems.findIndex(
+									(i) => i.src === selected.src
+								)
+								const next = (currentIndex + 1) % galleryItems.length
+								setSelected(galleryItems[next])
+							}}
+						>
+							&#8594;
+						</button>
+
+						{/* Image & Description */}
 						<img
 							src={selected.src}
 							alt={selected.title}
-							className="rounded-xl mb-4"
+							className="rounded-xl mb-4 max-h-[60vh] mx-auto object-contain"
 						/>
 						<h3 className="text-xl font-semibold text-white mb-2">
 							{selected.title}

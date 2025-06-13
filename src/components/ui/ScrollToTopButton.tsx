@@ -7,6 +7,7 @@ import {
 	FaEnvelope,
 	FaGithub,
 	FaLinkedin,
+	FaTimes,
 	FaWhatsapp,
 } from "react-icons/fa"
 
@@ -19,7 +20,6 @@ export default function ScrollToTopButton() {
 			const heroHeight = document.getElementById("hero")?.offsetHeight || 300
 			setIsVisible(window.scrollY > heroHeight)
 		}
-
 		window.addEventListener("scroll", handleScroll)
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
@@ -27,6 +27,9 @@ export default function ScrollToTopButton() {
 	const scrollToHome = () => {
 		document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })
 	}
+
+	const isTouchDevice =
+		typeof window !== "undefined" && "ontouchstart" in window
 
 	return (
 		<AnimatePresence>
@@ -37,10 +40,10 @@ export default function ScrollToTopButton() {
 					exit={{ opacity: 0 }}
 					transition={{ duration: 0.3 }}
 					className="fixed bottom-6 right-6 z-50"
-					onMouseEnter={() => setIsHovered(true)}
-					onMouseLeave={() => setIsHovered(false)}
+					onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
+					onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
 				>
-					{/* Hover Panel */}
+					{/* Hover/Toggle Panel */}
 					<AnimatePresence>
 						{isHovered && (
 							<motion.div
@@ -74,13 +77,24 @@ export default function ScrollToTopButton() {
 								>
 									<FaGithub className="text-white text-xl hover:scale-110 transition" />
 								</a>
+
+								{/* Close icon for mobile */}
+								<button
+									onClick={() => setIsHovered(false)}
+									className="sm:hidden text-red-400 hover:text-red-500"
+									title="Close panel"
+								>
+									<FaTimes className="text-lg" />
+								</button>
 							</motion.div>
 						)}
 					</AnimatePresence>
 
 					{/* Main Button */}
 					<motion.button
-						onClick={scrollToHome}
+						onClick={() =>
+							isTouchDevice ? setIsHovered((prev) => !prev) : scrollToHome()
+						}
 						title="Scroll to Top"
 						aria-label="Scroll to Home"
 						whileHover={{ scale: 1.1 }}
