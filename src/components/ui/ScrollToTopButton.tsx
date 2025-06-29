@@ -92,9 +92,10 @@ export default function ScrollToTopButton() {
 
 					{/* Main Button */}
 					<motion.button
-						onClick={() =>
-							isTouchDevice ? setIsHovered((prev) => !prev) : scrollToHome()
-						}
+						onClick={() => {
+							scrollToHome()
+							if (isTouchDevice) setIsHovered(false)
+						}}
 						title="Scroll to Top"
 						aria-label="Scroll to Home"
 						whileHover={{ scale: 1.1 }}
